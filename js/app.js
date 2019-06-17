@@ -2,17 +2,24 @@
 
 var productContainer = document.getElementById('allProducts');
 var leftImgTag = document.getElementById('left');
-var centerImgTag = document.getElementById('center');
+var middleImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
+
+var totalClicks = 0;
 
 Product.allProducts = [];
 Product.checkDupes = [];
+
+// //store products already on the page
+var leftProduct = null;
+var middleProduct = null;
+var rightProduct = null;
 
 function Product (name, src) {
   this.name = name;
   this.src = src;
   this.clicks = 0;
-  this.views = 0;
+  this.timesShown = 0;
   Product.allProducts.push(this);
 }
 
@@ -59,7 +66,47 @@ function displayProducts () {
   }
 
   leftImgTag.src = Product.allProducts[Product.checkDupes[0]].src;
-  centerImgTag.src = Product.allProducts[Product.checkDupes[1]].src;
+  Product.allProducts[Product.checkDupes[0]].timesShown++;
+  leftProduct = Product.allProducts[Product.checkDupes[0]];
+
+  middleImgTag.src = Product.allProducts[Product.checkDupes[1]].src;
+  Product.allProducts[Product.checkDupes[1]].timesShown++;
+  middleProduct = Product.allProducts[Product.checkDupes[1]];
+
   rightImgTag.src = Product.allProducts[Product.checkDupes[2]].src;
+  Product.allProducts[Product.checkDupes[2]].timesShown++;
+  rightProduct = Product.allProducts[Product.checkDupes[2]];
+
+  //clear the dupes array
+  Product.checkDupes = [];
 }
 
+var handleClick = function (event) {
+  console.log('clicked');
+  if (totalClicks < 25) {
+    var clickedProduct = event.target;
+    var id = clickedProduct.id;
+    if (id === 'left' || id === 'center' || id === 'right') {
+      if (id === 'left') {
+        leftProduct.clicks++;
+      }
+      if (id === 'center') {
+        middleProduct.clicks++;
+      }
+      if (id === 'right') {
+        rightProduct.clicks++;
+      }
+    }
+    leftImgTag.timesShown++;
+    middleImgTag.timesShown++;
+    rightImgTag.timesShown++;
+    displayProducts();
+  } else if (totalClicks === 25) {
+    productContainer.removeEventListener('click', handleClick);
+  }
+  totalClicks++;
+};
+
+
+
+productContainer.addEventListener('click', handleClick);
