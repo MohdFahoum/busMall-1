@@ -4,6 +4,7 @@ var productContainer = document.getElementById('allProducts');
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
+var stats = document.getElementById('stats');
 
 var totalClicks = 0;
 
@@ -97,16 +98,20 @@ var handleClick = function (event) {
         rightProduct.clicks++;
       }
     }
-    leftImgTag.timesShown++;
-    middleImgTag.timesShown++;
-    rightImgTag.timesShown++;
     displayProducts();
   } else if (totalClicks === 25) {
     productContainer.removeEventListener('click', handleClick);
+    renderStats();
   }
   totalClicks++;
 };
 
-
+function renderStats () {
+  for (var i = 0; i < Product.allProducts.length; i++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = Product.allProducts[i].clicks + ' votes for ' + Product.allProducts[i].name;
+    stats.appendChild(liEl);
+  }
+}
 
 productContainer.addEventListener('click', handleClick);
