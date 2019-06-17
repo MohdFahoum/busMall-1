@@ -1,10 +1,12 @@
 'use strict';
 
-Product.allProducts = [];
-
+var productContainer = document.getElementById('allProducts');
 var leftImgTag = document.getElementById('left');
 var centerImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
+
+Product.allProducts = [];
+Product.checkDupes = [];
 
 function Product (name, src) {
   this.name = name;
@@ -38,12 +40,26 @@ new Product('wine-glass','./img/wine-glass.jpg');
 displayProducts();
 
 function randomNumber () {
-  return Math.round(Math.random() * Product.allProducts.length);
+  return Math.floor(Math.random() * Product.allProducts.length);
 }
 
 function displayProducts () {
-  //generate an array of random # that correlates with each ind
-  leftImgTag.src = Product.allProducts[0].src;
-  centerImgTag.src = Product.allProducts[1].src;
-  rightImgTag.src = Product.allProducts[2].src;
+  //generate an array of random # that correlates with each index
+  for (var i = 0; i < 3; i++) {
+    var number = randomNumber();
+    //if the number is not in the array, then the image has not been shown,
+    //so push the number into the array
+    if (!Product.checkDupes.includes(number)) {
+      Product.checkDupes.push(number);
+    } else {
+      //the number generated exists and we need to loop again,
+      //so i needs to decrement and the loop can continue
+      i--;
+    }
+  }
+
+  leftImgTag.src = Product.allProducts[Product.checkDupes[0]].src;
+  centerImgTag.src = Product.allProducts[Product.checkDupes[1]].src;
+  rightImgTag.src = Product.allProducts[Product.checkDupes[2]].src;
 }
+
