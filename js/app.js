@@ -7,9 +7,11 @@ var rightImgTag = document.getElementById('right');
 var stats = document.getElementById('stats');
 
 var totalClicks = 0;
-
+//holds all products instantiated
 Product.allProducts = [];
+//holds 6 values
 Product.checkDupes = [];
+
 
 // //store products already on the page
 var leftProduct = null;
@@ -52,20 +54,18 @@ function randomNumber () {
 }
 
 function displayProducts () {
-  //generate an array of random # that correlates with each index
-  for (var i = 0; i < 3; i++) {
+  //generate array of random # that correlates with each index
+  while (Product.checkDupes.length < 6) {
     var number = randomNumber();
-    //if the number is not in the array, then the image has not been shown,
+    //if the number is not in the array, then that image has not been shown,
     //so push the number into the array
     if (!Product.checkDupes.includes(number)) {
       Product.checkDupes.push(number);
-    } else {
-      //the number generated exists and we need to loop again,
-      //so i needs to decrement and the loop can continue
-      i--;
     }
+    //do this until the array is at 6 numbers again
+    //all 6 numbers are unique
   }
-
+  console.log(Product.checkDupes);
   leftImgTag.src = Product.allProducts[Product.checkDupes[0]].src;
   Product.allProducts[Product.checkDupes[0]].timesShown++;
   leftProduct = Product.allProducts[Product.checkDupes[0]];
@@ -78,32 +78,40 @@ function displayProducts () {
   Product.allProducts[Product.checkDupes[2]].timesShown++;
   rightProduct = Product.allProducts[Product.checkDupes[2]];
 
-  //clear the dupes array
-  Product.checkDupes = [];
+  //only keep the last 3 numbers because the first 3 have been used
+  //these 3 nums will now be at the beginning of checkDupes
+  Product.checkDupes = Product.checkDupes.slice(3, 6);
+  console.log(Product.checkDupes);
 }
 
 var handleClick = function (event) {
-  console.log('clicked');
-  if (totalClicks < 25) {
-    var clickedProduct = event.target;
-    var id = clickedProduct.id;
-    if (id === 'left' || id === 'center' || id === 'right') {
-      if (id === 'left') {
-        leftProduct.clicks++;
-      }
-      if (id === 'center') {
-        middleProduct.clicks++;
-      }
-      if (id === 'right') {
-        rightProduct.clicks++;
-      }
+  if (event.target === productContainer) {
+    return alert('click on an image, please');
+  }
+  totalClicks++;
+  console.log('clicked ' + totalClicks);
+  var clickedProduct = event.target;
+  var id = clickedProduct.id;
+  if (id === 'left' || id === 'center' || id === 'right') {
+    if (id === 'left') {
+      leftProduct.clicks++;
+      console.log(leftProduct.name + ' was selected');
     }
-    displayProducts();
-  } else if (totalClicks === 25) {
+    if (id === 'center') {
+      middleProduct.clicks++;
+      console.log( middleProduct.name + ' was selected');
+    }
+    if (id === 'right') {
+      rightProduct.clicks++;
+      console.log(rightProduct.name + ' was selected');
+    }
+  }
+
+  if (totalClicks === 25) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
   }
-  totalClicks++;
+  displayProducts();
 };
 
 function renderStats () {
