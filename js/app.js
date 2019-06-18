@@ -4,6 +4,7 @@ var allProductNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubbl
 var allProductSrc = ['./img/bag.jpg', './img/banana.jpg', './img/bathroom.jpg', './img/boots.jpg', './img/breakfast.jpg', './img/bubblegum.jpg', './img/chair.jpg', './img/cthulhu.jpg', './img/dog-duck.jpg', './img/dragon.jpg', './img/pen.jpg', './img/pet-sweep.jpg', './img/scissors.jpg', './img/shark.jpg', './img/sweep.png', './img/tauntaun.jpg', './img/unicorn.jpg', './img/usb.gif', './img/water-can.jpg', './img/wine-glass.jpg'];
 
 var productContainer = document.getElementById('allProducts');
+
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
@@ -14,7 +15,6 @@ var totalClicks = 0;
 Product.allProducts = [];
 //holds 6 values
 Product.checkDupes = [];
-
 
 // //store products already on the page
 var leftProduct = null;

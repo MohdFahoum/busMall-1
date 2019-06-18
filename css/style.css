@@ -1,4 +1,32 @@
-img {
+body {
+  width: 905px;
+  margin: auto;
+  background-color: #8093F1;
+  color: #FDC5F5;
+}
+
+h1 {
+  font-family: 'Faster One', cursive;
+  font-size: 8.5em;
+  text-shadow: 1px 1px #8093F1;
+  text-align: center;
+}
+
+p {
+  font-family: 'Montserrat Alternates', sans-serif;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+#allProducts {
+  position: relative;
+}
+
+#allProducts img {
   height: 25%;
   width: 25%;
+  border: 15px solid #72DDF7;
+  border-radius: 5%;
+  margin: 5px;
+  align-content: center;
 }
