@@ -4,7 +4,7 @@ var allProductNames = ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubbl
 var allProductSrc = ['./img/bag.jpg', './img/banana.jpg', './img/bathroom.jpg', './img/boots.jpg', './img/breakfast.jpg', './img/bubblegum.jpg', './img/chair.jpg', './img/cthulhu.jpg', './img/dog-duck.jpg', './img/dragon.jpg', './img/pen.jpg', './img/pet-sweep.jpg', './img/scissors.jpg', './img/shark.jpg', './img/sweep.png', './img/tauntaun.jpg', './img/unicorn.jpg', './img/usb.gif', './img/water-can.jpg', './img/wine-glass.jpg'];
 
 var productContainer = document.getElementById('allProducts');
-
+var buttonLinks = document.getElementById('buttonLinks');
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
@@ -96,7 +96,7 @@ var handleClick = function(event) {
     }
   }
 
-  if(totalClicks === 25) {
+  if(totalClicks === 2) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
   }
@@ -104,6 +104,16 @@ var handleClick = function(event) {
 };
 
 function renderStats() {
+  var h1El = document.createElement('h1');
+  h1El.textContent = 'Stats';
+  stats.appendChild(h1El);
+
+  var buttonEl = document.createElement('a');
+  buttonEl.textContent = 'Stats';
+  buttonEl.setAttribute('class', 'btn');
+  buttonEl.href = '#statsContainer';
+  buttonLinks.appendChild(buttonEl);
+
   for (var i = 0; i < Product.allProducts.length; i++) {
     var liEl = document.createElement('li');
     liEl.textContent = Product.allProducts[i].clicks + ' votes for ' + Product.allProducts[i].name;
