@@ -9,18 +9,31 @@
   </head>
 
   <body>
-    <section>
-      <h1>Bus Mall</h1>
-      <p>Please select your favorite item from the 3 shown.  You will do this 25 times.</p>
+    <section class="intro">
+      <div class="inner">
+        <div class="content">
+          <h1>Bus Mall</h1>
+          <p>Please select your favorite item from the 3 shown.  You will do this 25 times.</p>
+          <section id="allProducts">
+            <img id="left" src="">
+            <img id="center" src="">
+            <img id="right" src="">
+          </section>
+          <section id="buttonLinks">
+            <!-- <a class="btn" href="#statsContainer">About Us</a>
+            <a class="btn" href="#graphContainer">Product</a> -->
+          </section>
+        </div>
+      </div>
     </section>
 
-    <section id="allProducts">
-      <img id="left" src="">
-      <img id="center" src="">
-      <img id="right" src="">
+    <section id="statsContainer">
+      <ul id="stats"></ul>
     </section>
 
-    <ul id="stats"></ul>
-    <script src="./js/app.js"></script>
-  </body>
+    <section id="graphContainer">
+    </section>
+
+      <script src="./js/app.js"></script>
+    </body>
 </html>
