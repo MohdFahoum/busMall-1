@@ -52,6 +52,21 @@ p {
   align-content: center;
 }
 
+/* BUTTONS */
+.btn {
+  background: #4D4D55;
+  /* opacity: 0.5; */
+  border-radius: 9px;
+  font-family: 'Montserrat Alternates', sans-serif;
+  color: rgb(175, 206, 198);
+  font-size: 200%;
+  padding: 10px 20px;
+  border: solid #E2E6E5 3px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 0 20px;
+}
+
 /* STATS */
 #stats {
   margin: 60px;
@@ -64,16 +79,11 @@ li {
   font-size: 20px;
 }
 
-/* BUTTONS */
-.btn {
-  background: #4D4D55;
-  /* opacity: 0.5; */
-  border-radius: 9px;
-  font-family: 'Montserrat Alternates', sans-serif;
-  color: #E2E6E5;
-  font-size: 200%;
-  padding: 10px 20px;
-  border: solid #E2E6E5 3px;
-  text-transform: uppercase;
-  text-decoration: none;
+/* CHART */
+#chartContainer {
+  text-align: center;
+  margin: auto;
+  width: 650px;
+  height: 650px;
+  margin-bottom: 50px;
 }

@@ -5,10 +5,12 @@ var allProductSrc = ['./img/bag.jpg', './img/banana.jpg', './img/bathroom.jpg', 
 
 var productContainer = document.getElementById('allProducts');
 var buttonLinks = document.getElementById('buttonLinks');
+var stats = document.getElementById('stats');
+var chartContainer = document.getElementById('chartContainer');
+
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
 var rightImgTag = document.getElementById('right');
-var stats = document.getElementById('stats');
 
 var totalClicks = 0;
 //holds all products instantiated
@@ -54,7 +56,6 @@ function displayProducts() {
     //do this until the array is at 6 numbers again
     //all 6 numbers are unique
   }
-  console.log(Product.checkDupes);
   leftImgTag.src = Product.allProducts[Product.checkDupes[0]].src;
   Product.allProducts[Product.checkDupes[0]].timesShown++;
   leftProduct = Product.allProducts[Product.checkDupes[0]];
@@ -70,7 +71,6 @@ function displayProducts() {
   //only keep the last 3 numbers because the first 3 have been used
   //these 3 nums will now be at the beginning of checkDupes
   Product.checkDupes = Product.checkDupes.slice(3, 6);
-  console.log(Product.checkDupes);
 }
 
 var handleClick = function(event) {
@@ -84,21 +84,19 @@ var handleClick = function(event) {
   if (id === 'left' || id === 'center' || id === 'right') {
     if (id === 'left') {
       leftProduct.clicks++;
-      console.log(leftProduct.name + ' was selected');
     }
     if (id === 'center') {
       middleProduct.clicks++;
-      console.log( middleProduct.name + ' was selected');
     }
     if (id === 'right') {
       rightProduct.clicks++;
-      console.log(rightProduct.name + ' was selected');
     }
   }
 
-  if(totalClicks === 2) {
+  if(totalClicks === 10) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
+    renderChart();
   }
   displayProducts();
 };
@@ -119,6 +117,51 @@ function renderStats() {
     liEl.textContent = Product.allProducts[i].clicks + ' votes for ' + Product.allProducts[i].name;
     stats.appendChild(liEl);
   }
+}
+
+function renderChart() {
+  var buttonEl = document.createElement('a');
+  buttonEl.textContent = 'Chart';
+  buttonEl.setAttribute('class', 'btn');
+  buttonEl.href = '#chartContainer';
+  buttonLinks.appendChild(buttonEl);
+
+  var ctx = document.getElementById('productChart').getContext('2d');
+  var votes = [];
+  var names = [];
+  for(var i = 0; i < Product.allProducts.length; i++) {
+    votes[i] = Product.allProducts[i].clicks;
+    names[i] = Product.allProducts[i].name;
+  }
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        data: votes,
+        label: 'Votes',
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      title: {
+        display: true,
+        text: 'Votes Per Product',
+        fontSize: 50
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 1
+          }
+        }]
+      }
+    }
+  });
 }
 
 productContainer.addEventListener('click', handleClick);
