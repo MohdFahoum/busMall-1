@@ -6,6 +6,7 @@ var allProductSrc = ['./img/bag.jpg', './img/banana.jpg', './img/bathroom.jpg', 
 var productContainer = document.getElementById('allProducts');
 var buttonLinks = document.getElementById('buttonLinks');
 var stats = document.getElementById('stats');
+var chartContainer = document.getElementById('chartContainer');
 
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
@@ -91,7 +92,7 @@ var handleClick = function(event) {
     }
   }
 
-  if(totalClicks === 25) {
+  if(totalClicks === 10) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
     renderChart();
@@ -118,13 +119,19 @@ function renderStats() {
 }
 
 function renderChart() {
+  var canvasEl = document.createElement('canvas');
+  canvasEl.setAttribute = ('id', 'productChart');
+  chartContainer.style.width = '500px';
+  chartContainer.style.height = '500px';
+  chartContainer.appendChild(canvasEl);
+
   var buttonEl = document.createElement('a');
   buttonEl.textContent = 'Chart';
   buttonEl.setAttribute('class', 'btn');
   buttonEl.href = '#chartContainer';
   buttonLinks.appendChild(buttonEl);
 
-  var ctx = document.getElementById('productChart').getContext('2d');
+  var ctx = canvasEl.getContext('2d');
   var votes = [];
   var names = [];
   for(var i = 0; i < Product.allProducts.length; i++) {
