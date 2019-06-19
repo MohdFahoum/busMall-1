@@ -155,16 +155,14 @@ var handleClick = function(event) {
   totalClicks++;
   var clickedProduct = event.target;
   var id = clickedProduct.id;
-  if (id === 'left' || id === 'center' || id === 'right') {
-    if (id === 'left') {
-      leftProduct.clicks++;
-    }
-    if (id === 'center') {
-      middleProduct.clicks++;
-    }
-    if (id === 'right') {
-      rightProduct.clicks++;
-    }
+  if (id === 'left') {
+    leftProduct.clicks++;
+  }
+  if (id === 'center') {
+    middleProduct.clicks++;
+  }
+  if (id === 'right') {
+    rightProduct.clicks++;
   }
 
   if(totalClicks === 25) {
