@@ -6,7 +6,6 @@ var allProductSrc = ['./img/bag.jpg', './img/banana.jpg', './img/bathroom.jpg', 
 var productContainer = document.getElementById('allProducts');
 var buttonLinks = document.getElementById('buttonLinks');
 var stats = document.getElementById('stats');
-var chartContainer = document.getElementById('chartContainer');
 
 var leftImgTag = document.getElementById('left');
 var middleImgTag = document.getElementById('center');
@@ -78,7 +77,6 @@ var handleClick = function(event) {
     return alert('click on an image, please');
   }
   totalClicks++;
-  console.log('clicked ' + totalClicks);
   var clickedProduct = event.target;
   var id = clickedProduct.id;
   if (id === 'left' || id === 'center' || id === 'right') {
@@ -93,7 +91,7 @@ var handleClick = function(event) {
     }
   }
 
-  if(totalClicks === 10) {
+  if(totalClicks === 25) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
     renderChart();
