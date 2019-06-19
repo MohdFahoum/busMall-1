@@ -92,7 +92,7 @@ var handleClick = function(event) {
     }
   }
 
-  if(totalClicks === 10) {
+  if(totalClicks === 25) {
     productContainer.removeEventListener('click', handleClick);
     renderStats();
     renderChart();
